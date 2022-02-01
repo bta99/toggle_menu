@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toggle Menu</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+<style>
+   @import url('https://fonts.googleapis.com/css2?family=Supermercado+One&display=swap');
+   *{
+       padding: 0;
+       margin: 0;
+       box-sizing: border-box;
+   }
+   html{
+       width: 100%;
+       height: 100%;
+   }
+   body{
+       width: 100%;
+       height: 100%;
+       font-family: Supermercado One;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+   }
+   .box{
+       width:550px;
+       height: 550px;
+    background-image: linear-gradient(45deg,lightpink,royalblue);
+    border-radius: 15px;
+    box-shadow: 9px -3px 16px 0px grey;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   }
+   .menu{
+      
+   }
+   .menuitem{
+       width:200px;
+       height:25px;
+       overflow: hidden;
+       background-color: whitesmoke;
+       list-style-type: none;
+       text-align: start;
+       padding:5px 10px;
+       transition: all 0.5s;
+       position: relative;
+   }
+   .menuitem:hover{
+       cursor: pointer;
+   }
+   .menu_child{
+       text-align: center;
+       width: 100%;
+       height: auto;
+       /* padding:5px; */
+       list-style-type: none;
+   }
+   .menu_child_item{
+      padding:10px;
+   }
+   .menu_child_item:hover{
+       background-color: red;
+   }
+   i{
+       position: absolute;
+       margin-left: 10px;
+       right:10px;
+   }
+</style>
+</head>
+<body>
+    <div class="box">
+        <ul class="menu">
+          <li class="menuitem">Nike <i class="fas fa-angle-down"></i>
+             <ul class="menu_child">
+                <li class="menu_child_item">Demo 1</li>
+                <li class="menu_child_item">Demo 2</li>
+                <li class="menu_child_item">Demo 3</li>
+             </ul>
+          </li>
+          <li class="menuitem">Adidas <i class="fas fa-angle-down"></i>
+            <ul class="menu_child">
+                <li class="menu_child_item">Demo 1</li>
+                <li class="menu_child_item">Demo 2</li>
+                <li class="menu_child_item">Demo 3</li>
+                <li class="menu_child_item">Demo 4</li>
+             </ul>
+          </li>
+          <li class="menuitem">Puma <i class="fas fa-angle-down"></i></li>
+        </ul>
+    </div>
+
+
+    <script>
+        var lst_menu_item = document.querySelectorAll('.menuitem');
+        var item = document.querySelectorAll('.menu_child');
+        var lsticon = document.querySelectorAll('.menuitem i');
+        var flag = false;
+        var size = 0;
+        var index = -1;
+        for(let i = 0;i<lst_menu_item.length;i++)
+        {
+            lst_menu_item[i].onclick = ()=>{
+            if(i != index)
+            {
+            // flag = !flag;
+            size = lst_menu_item[i].clientHeight;
+            for(let j = 0;j<lst_menu_item.length;j++)
+            {
+                lsticon[j].classList.replace('fa-angle-up','fa-angle-down')
+                lst_menu_item[j].style.height = size+"px";
+            }
+            lsticon[i].classList.replace('fa-angle-down','fa-angle-up')
+            if(item[i] == null)
+            {
+                // lst_menu_item[i].style.height = lst_menu_item[i].clientHeight+"px";
+                // return false;
+            }
+            else{
+                lst_menu_item[i].style.height = item[i].clientHeight+lst_menu_item[i].clientHeight+"px";
+            }
+            index = i;
+            }
+            else if((i == index)){
+                // flag = !flag;
+                lsticon[i].classList.replace('fa-angle-up','fa-angle-down')
+               lst_menu_item[i].style.height = size+"px";
+               size = lst_menu_item[i].clientHeight;
+               index = -1;
+            }
+        };
+        }
+
+        // lst_menu_item[1].onclick = ()=>{
+        //      console.log('cc');
+        // };
+    </script>
+</body>
+</html>
